@@ -1,5 +1,5 @@
-# titanic_ps_solution
-Solution repo to Titanic problem set
+# D100_ps2_ex5
+Repository for Problem Set 2, Exercise 5
 
 
 ## Set-up
