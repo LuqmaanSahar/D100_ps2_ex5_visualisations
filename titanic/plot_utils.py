@@ -4,7 +4,7 @@ from cProfile import label
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-FEATURES_DIR = "features"
+FEATURES_DIR = "features"   # folder to export figures to
 COLOR_LIST = ["#A5D7E8", "#576CBC", "#19376D", "#0b2447"]
 
 os.makedirs(FEATURES_DIR, exist_ok=True)    # Ensure the folder exists
