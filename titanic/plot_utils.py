@@ -37,3 +37,43 @@ def plot_distribution_pairs(data_df, feature, title, hue="set"):
     print(f"Saved figure to {file_path}")
     
     plt.show()
+
+
+
+def plot_categorical_survival(data_df, categorical_cols, target='Survived',
+                              figsize=(15, 5), color="skyblue", edgecolor="black"):
+    """
+    Plots barplots of the mean target value for multiple categorical columns.
+
+    Parameters
+    ----------
+    data_df : pd.DataFrame
+        The dataframe containing the data.
+    categorical_cols : list of str
+        List of categorical columns to plot.
+    target : str, default='Survived'
+        The target column to plot against.
+    figsize : tuple, default=(15, 5)
+        Figure size.
+    color : str, default='skyblue'
+        Bar color.
+    edgecolor : str, default='black'
+        Bar edge color.
+    """
+    n_cols = len(categorical_cols)
+    fig, axes = plt.subplots(1, n_cols, figsize=figsize)
+    
+    # If only one column, axes is not an array
+    if n_cols == 1:
+        axes = [axes]
+    
+    for ax, col in zip(axes, categorical_cols):
+        sns.barplot(data=data_df, x=col, y=target, color=color, edgecolor=edgecolor, ax=ax)
+        ax.set_title(f"{target} by {col}")
+
+    file_path = os.path.join(FEATURES_DIR, "vis1.png")
+    plt.savefig(file_path, bbox_inches="tight")
+    print(f"Saved figure to {file_path}")
+    
+    plt.tight_layout()
+    plt.show()
