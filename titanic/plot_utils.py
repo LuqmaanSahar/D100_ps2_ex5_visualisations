@@ -1,9 +1,13 @@
+import os
+
 from cProfile import label
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-
+FEATURES_DIR = "features"   # folder to export figures to
 COLOR_LIST = ["#A5D7E8", "#576CBC", "#19376D", "#0b2447"]
+
+os.makedirs(FEATURES_DIR, exist_ok=True)    # Ensure the folder exists
 
 
 def plot_count_pairs(data_df, feature, title, hue="set"):
@@ -11,6 +15,11 @@ def plot_count_pairs(data_df, feature, title, hue="set"):
     sns.countplot(x=feature, data=data_df, hue=hue, palette=COLOR_LIST)
     plt.grid(color="black", linestyle="-.", linewidth=0.5, axis="y", which="major")
     ax.set_title(f"Number of passengers / {title}")
+
+    file_path = os.path.join(FEATURES_DIR, f"{feature}_countplot.png")
+    plt.savefig(file_path, bbox_inches="tight")
+    print(f"Saved figure to {file_path}")
+
     plt.show()
 
 
@@ -22,4 +31,9 @@ def plot_distribution_pairs(data_df, feature, title, hue="set"):
         )
     ax.set_title(f"Number of passengers / {title}")
     g.legend()
+
+    file_path = os.path.join(FEATURES_DIR, f"{feature}_distribution.png")
+    plt.savefig(file_path, bbox_inches="tight")
+    print(f"Saved figure to {file_path}")
+    
     plt.show()
